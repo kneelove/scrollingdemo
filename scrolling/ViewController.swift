@@ -14,12 +14,21 @@ class ViewController: UIViewController {
     var images = [UIImageView()]
 
     
+
+    
     override func viewDidLoad() {
+    
         super.viewDidLoad()
+      
+        
       
     }
 
+    @IBAction func detectSwipe(_ sender: Any) {
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
+     print("Scrollview width: \(scrollview.frame.size.width)")
         var content:CGFloat = 0.0
         
         
@@ -27,17 +36,22 @@ class ViewController: UIViewController {
             
             let image = UIImage(named: "icon\(x).png")
             
+            let scrollwidth = scrollview.frame.size.width
             let imageView = UIImageView(image: image)
+           
+            
+           
+            
             images.append(imageView)
             var newX:CGFloat = 0.0
-            newX = view.frame.width/2+view.frame.size.width*CGFloat(x)
+            newX = scrollwidth/2+scrollwidth*CGFloat(x)
             content += newX
             scrollview.addSubview(imageView)
-            imageView.frame = CGRect(x: newX-75, y: (view.frame.size.height/2), width: 150, height:150)
-            
+            imageView.frame = CGRect(x: newX-75, y: (scrollview.frame.size.height/2)-75, width: 150, height:150)
             
 
              }
+        scrollview.clipsToBounds = false
         scrollview.contentSize = CGSize(width: content, height: view.frame.height
         )
     
